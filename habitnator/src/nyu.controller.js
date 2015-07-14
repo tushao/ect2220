@@ -11,3 +11,22 @@ app.initialize = function(){
 app.addHabit = function(){
 	alert("habit added...");
 }
+
+
+
+/*
+
+
+
+
+function - dsdsd
+find the button
+
+reset the var
+
+set the text
+set the on tap 
+call the other function
+
+
+*/
