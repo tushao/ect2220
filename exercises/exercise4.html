@@ -13,7 +13,7 @@ Make all divs except the "div-1" visible (hide all but first div)
 </head>
 <body>
 
-<div id"div-1">
+<div id="div-1">
 	<h2>FIRST DIV</h2>
 </div>
 
@@ -30,6 +30,12 @@ Make all divs except the "div-1" visible (hide all but first div)
 </div>
 
 <script>
+
+	$(document).ready(function(){
+		$("#div-2").hide();
+		$("#div-3").hide();
+		$("#div-4").hide();
+	});
 
 </script>
 

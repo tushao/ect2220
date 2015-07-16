@@ -13,7 +13,7 @@ When user slides right on the second div, have the second div hide and then show
 </head>
 <body>
 
-<div id"div-1">
+<div id="div-1">
 	<h2>FIRST DIV</h2>
 </div>
 
@@ -30,6 +30,17 @@ When user slides right on the second div, have the second div hide and then show
 </div>
 
 <script>
+
+	$(document).ready(function(){
+		$("#div-2").hide();
+		$("#div-3").hide();
+		$("#div-4").hide();
+
+		$("#div-1").on("slide", function(){
+			$(this).hide();
+			$("#div-2").show();
+		});	
+	});
 
 </script>
 
