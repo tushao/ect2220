@@ -1,0 +1,37 @@
+<!--
+
+-->
+
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="styles.css" />
+	<script type="text/javascript" charset="utf-8" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+</head>
+<body>
+
+
+	
+
+
+<script>
+
+	$("#intro-screen-1").click(function(){
+		$("#intro-screen-2").show();
+		$("#intro-screen-1").hide();
+	});
+
+	$("#intro-screen-2").click(function(){
+		$("#intro-screen-3").show();
+		$("#intro-screen-2").hide();
+	});
+
+	$("#intro-screen-3").click(function(){
+		alert('done');
+		$("#intro-screen-3").hide();
+	});
+
+
+</script>
+
+</body>
+</html>
