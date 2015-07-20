@@ -60,8 +60,6 @@ var peopleListLarge = [
 
 app.init = function(){
 	console.log("App is initialized...");
-
-
 	app.showPeople();
 };
 
@@ -71,13 +69,10 @@ app.showPeople = function(filter){
 	var htmlOutput = "";
 	for(var x=0; x<peopleListLarge.length; x++){
 
-		if(peopleListLarge[x].fname == filter){
-
 			htmlOutput = htmlOutput + "<div>First Name: " + peopleListLarge[x].fname + "</div>";
 			htmlOutput = htmlOutput + "<div>Last Name: " + peopleListLarge[x].lname + "</div>"; 
 			htmlOutput = htmlOutput + "<div>Phone: " + peopleListLarge[x].phone + "</div>"; 
 
-		}
 	}
 
 	$("#peopleList-output").html(htmlOutput);

@@ -1,28 +1,102 @@
 var app = {};
 
+var habitList = [
+	{
+		"title": "Smoke less",
+		"started": "07-15-2015",
+		"type": "decrease",
+		"target": 1,
+		"unit": "session",
+		"log": [
+			{
+				"date": "07-15-2015",
+				"amount": 1,
+				"note": ""
+			},
+			{
+				"date": "07-16-2015",
+				"amount": 1,
+				"note": ""
+			}
+		]
+	},
+	{
+		"title": "Dining outside",
+		"started": "07-14-2015",
+		"type": "decrease",
+		"target": 1,
+		"unit": "outing",
+		"log": [
+			{
+				"date": "07-16-2015",
+				"amount": 1,
+				"note": ""
+			},
+			{
+				"date": "07-14-2015",
+				"amount": 1,
+				"note": ""
+			}
+		]
+	},
+	{
+		"title": "Exercise",
+		"started": "07-12-2015",
+		"type": "increase",
+		"target": 1,
+		"unit": "session",
+		"log": [
+			{
+				"date": "07-12-2015",
+				"amount": 1,
+				"note": ""
+			},
+			{
+				"date": "07-15-2015",
+				"amount": 1,
+				"note": ""
+			}
+		]
+	}
+];
+
+
 app.initialize = function(){
 	$.afui.launch();
-	app.setupIntro();
+	app.populateHabits();
 };
 
-app.setupIntro = function(){
+app.populateHabits = function(){
 
-	$('.intro-screen').hide();
-	$("#intro-screen-1").show();
+	var htmlOutput = "";
 
-	//$("#intro-screen-1").click(function(){
-	$("#intro-screen-1").on("swipe", function(){
-		$("#intro-screen-2").show();
-		$("#intro-screen-1").hide();
-	});
+	//open up the <ul>
+	htmlOutput = "<ul class='list'>";
 
-	$("#intro-screen-2").on("swipe", function(){
-		$("#intro-screen-3").show();
-		$("#intro-screen-2").hide();
-	});
+	//loop through the badboy
+	for(var x=0; x<habitList.length; x++){
+		htmlOutput += "<li class='swipe-reveal'>";
+		htmlOutput += "<a>" + habitList[x].title + "</a>";
+		htmlOutput += "</li>";
+	}
+	
 
-	$("#intro-screen-3").on("swipe", function(){
-		alert('done');
-		$("#intro-screen-3").hide();
-	});
+	/*
+	<li class="swipe-reveal">
+	    <div class="swipe-content">Dining outside</div>
+	    <div class="swipe-hidden">
+	        <a class="button archive" onclick="$(this).closest('.swipe-reveal').remove()">Delete</a>
+	    </div>
+	</li>
+	*/
+
+
+	htmlOutput += "</ul>";
+
+
+	$("#habitList").html(htmlOutput);
+
+
 };
+
+
