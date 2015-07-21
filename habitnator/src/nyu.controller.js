@@ -1,5 +1,37 @@
 var app = {};
 
+app.initialize = function(){
+	$.afui.launch();
+
+	app.showHabits();
+};
+
+app.showHabits = function(){
+
+	console.log("APP: showHabits() called...");
+
+	var htmlOutput = "<ul class='list'>";
+	for(var x=0; x<habitList.length; x++){
+		htmlOutput += "<li><h1>" + habitList[x].title + "</h1> (" + habitList[x].type + ")" + "</li>";
+	}
+	htmlOutput += "</ul>";
+
+	//display the html
+	$("#habitList").html(htmlOutput);
+};
+
+
+/*
+	<li class="swipe-reveal">
+	    <div class="swipe-content">Dining outside</div>
+	    <div class="swipe-hidden">
+	        <a class="button archive" onclick="$(this).closest('.swipe-reveal').remove()">Delete</a>
+	    </div>
+	</li>
+	*/
+
+
+
 var habitList = [
 	{
 		"title": "Smoke less",
@@ -59,44 +91,3 @@ var habitList = [
 		]
 	}
 ];
-
-
-app.initialize = function(){
-	$.afui.launch();
-	app.populateHabits();
-};
-
-app.populateHabits = function(){
-
-	var htmlOutput = "";
-
-	//open up the <ul>
-	htmlOutput = "<ul class='list'>";
-
-	//loop through the badboy
-	for(var x=0; x<habitList.length; x++){
-		htmlOutput += "<li class='swipe-reveal'>";
-		htmlOutput += "<a>" + habitList[x].title + "</a>";
-		htmlOutput += "</li>";
-	}
-	
-
-	/*
-	<li class="swipe-reveal">
-	    <div class="swipe-content">Dining outside</div>
-	    <div class="swipe-hidden">
-	        <a class="button archive" onclick="$(this).closest('.swipe-reveal').remove()">Delete</a>
-	    </div>
-	</li>
-	*/
-
-
-	htmlOutput += "</ul>";
-
-
-	$("#habitList").html(htmlOutput);
-
-
-};
-
-

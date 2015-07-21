@@ -77,7 +77,7 @@ app.showPeople = function(filter){
 
 	$("#peopleList-output").html(htmlOutput);
 
-}
+};
 
 //-----------------------------------
 

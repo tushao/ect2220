@@ -9,6 +9,16 @@
 
 .circle {
 	border-radius: 50%;
-	width: 200px;
-	height: 200px; 
+	width: 20px;
+	height: 20px; 
+	background-color: #cccccc;
+	display: inline-block;
+}
+.active-circle{
+	background-color: #ffcc00;
+}
+
+.people-item-property{
+font-size: 20px;
+  padding: 4px;
 }
