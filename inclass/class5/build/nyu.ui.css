@@ -1,0 +1,14 @@
+.footer-action-btn{
+	font-size: 30px !important;
+}
+
+.intro-header{
+	font-size: 28px;
+	color: #ffcc00;
+}
+
+.circle {
+	border-radius: 50%;
+	width: 200px;
+	height: 200px; 
+}
