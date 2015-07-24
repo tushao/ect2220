@@ -343,6 +343,30 @@
 	},
 	"buffers":
 	[
+		{
+			"file": "inclass/class5/index.html",
+			"settings":
+			{
+				"buffer_size": 5487,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "inclass/class5/build/nyu.ui.css",
+			"settings":
+			{
+				"buffer_size": 324,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "inclass/class5/src/nyu.controller.js",
+			"settings":
+			{
+				"buffer_size": 3800,
+				"line_ending": "Unix"
+			}
+		}
 	],
 	"build_system": "",
 	"command_palette":
@@ -371,16 +395,17 @@
 	},
 	"file_history":
 	[
+		"/web/ect2220/inclass/class4/styles.css",
+		"/web/ect2220/inclass/class4/controller.js",
+		"/web/ect2220/habitnator/src/nyu.controller.js",
+		"/web/ect2220/habitnator/index.html",
 		"/web/ect2220/inclass/class5/build/nyu.ui.css",
 		"/web/ect2220/inclass/class5/src/nyu.controller.js",
 		"/web/ect2220/inclass/class5/index.html",
-		"/web/ect2220/inclass/class4/styles.css",
-		"/web/ect2220/inclass/class4/controller.js",
+		"/web/ect2220/inclass/styles.css",
 		"/web/ect2220/inclass/class5/controller.js",
-		"/web/ect2220/habitnator/src/nyu.controller.js",
 		"/web/ect2220/inclass/class4/sampledata.js",
 		"/web/ect2220/inclass/class4/index.html",
-		"/web/ect2220/habitnator/index.html",
 		"/web/ect2220/exercises/exercise6.html",
 		"/web/ect2220/exercises/exercise5.html",
 		"/web/ect2220/exercises/exercise4.html",
@@ -388,7 +413,6 @@
 		"/web/ect2220/inclass/Class 4/index.html",
 		"/web/ect2220/inclass/Class 4/model.js",
 		"/web/ect2220/habitnator/build/nyu.ui.css",
-		"/web/ect2220/inclass/styles.css",
 		"/web/ect2220/inclass/temp.html",
 		"/web/ect2220/exercises/exercise3.html",
 		"/web/ect2220/exercises/exercise2.html",
@@ -652,8 +676,97 @@
 	"groups":
 	[
 		{
+			"selected": 2,
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"file": "inclass/class5/index.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 5487,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								5357,
+								5376
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1844.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "inclass/class5/build/nyu.ui.css",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 324,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								290,
+								290
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/CSS/CSS.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "inclass/class5/src/nyu.controller.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3800,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								484,
+								484
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false,
+							"word_wrap": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
 			]
 		}
 	],
