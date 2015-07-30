@@ -17,6 +17,38 @@ through event listners and directly through function calls
 -----------------------------------------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------------------------------------
 
+Class 7 Assignment 
+
+
+1. When a habit object is selected in #home, save the selected habit ID to a variable in app
+- create app.selectedHabitID (ie. var app.selectedHabitID = "";)
+- set the variable equal to the habitID when it’s selected from the list 
+(hint: this occurs during the on click for the habit-item and when the id is passed to showHabitDetail() )
+
+2. Create a button in the habit detail screen that triggers a function that will handle the logic for adding 
+a log item to the currently selected habit object
+- add html to the index.html that is a button (eg. <a href=“#” class=“button>Add</a>
+- give the button an ID so you can add an on click handler to it
+- assign the button the click handler in showHabitDetail() have it call a function app.addHabitLog()
+
+3. Create the function for app called app.addHabitLog() and have the function pull the habit object
+- var habitObj = habitList[app.selectedHabitID]   //this uses the saved ID to get the selected habit obj
+- then create a temp log object (e.g. var tempLogObj = {}; tempLogObj.date = moment();)
+- then push the object to the habit object’s log array property — e.g. habitObj.log.push(tempLogObj);
+- then refresh the details display (app.showHabitDetail())
+
+4. Test and fix any bugs. Remember the following:
+- Follow the logic. Draw it out if necessary. 
+- PLEASE email me with questions. Doesn’t matter how basic. rv573@nyu.edu
+- Be a lawyer. When debugging, surface assumptions with console.log calls, and then comment out code 
+until you identify the damning evidence to make your case (i.e. find a solution). 
+
+I will be in our room on Thurs at 4:30pm, and we will  be doing hands on coding instead of live group coding. 
+Time to switch to the next level of mastery. Independent coding. You guys are doing great. I'm impressed by 
+how far you all have come - I think we if we push a little harder in the next few weeks, you'll be very capable 
+"prototypers."
+
+
 
 Class 8 In-Class
 
@@ -28,18 +60,19 @@ Individual Coding
 Group Coding
 - Implement model and local storage
 
-
 HW
 - Implement logic and CSS to configure the UI for a habit DETAIL
 
 
------------------------------------------------------------------------------------------------------------
 */
 
 
 //VARIABLE SET TO BE OBJECT
 //declare a variable called "app" and set its value to be an empty object {}
 var app = {};
+
+app.selectedHabitID="";
+
 
 
 
@@ -54,9 +87,6 @@ app.initialize = function(){
 	//this call to the $.afui object launches the interface which brings up the loader, and then calls the first panel in the index.html
 	$.afui.launch();
 
-	//loading habits
-	model.loadHabits();
-
 	//call a function that adds to some of the panels, a listener so that when the panel loads it'll call a certain function
 	//for example, i want this function to add a panelload handler to the "#addHabit" panel
 	app.bindPanelLoaders();
@@ -66,6 +96,7 @@ app.initialize = function(){
 	//technically, we might ALSO want to call this via "panelload" event listener on #home, so everytime #home loads this function
 	//also gets called and the habit list gets refreshed. maybe we'll do this later. 
 	app.showHabits();
+	//app.showAddHabit(); 
 };
 
 
@@ -80,21 +111,25 @@ app.bindPanelLoaders = function(){
 		//call the function app.showAddHabit() which handles making sure the "add" button works
 		app.showAddHabit(); 
 	});
-
-	$("#habitDetail").on("panelload", function(){
-		app.showHabitDetail();
-	})
-
 	$("#home").on("panelload", function(){
 		app.showHabits();
 	});
-
 }
 
 
-app.processAddHabit = function(){
+//FUNCTION ADDED TO OBJECT
+//this function is called whenever the #addHabit panel gets loaded (ie. the "panelload" event is fired which triggers the function call
+app.showAddHabit = function(){
 
-	//step 1 - declare THREE variables, one for each of the values we will pull from the form elements
+	//find the #addHabit-action element (which is a button), and when it is "click" execute all of the code that will grab the form element values
+	//when we add the .on make sure to turn off any existing handlers with .off()
+	//why? this function may have been called before, and if so, there might already be a .on("click"), so we need to .off() first, and then .on again
+	//this way we avoid multiple .on(click) calls being made.....
+	$("#addHabit-action").off();
+	$("#addHabit-action").on("click", function(){
+		console.log("APP: Add habit button was called....");
+		
+		//step 1 - declare THREE variables, one for each of the values we will pull from the form elements
 
 		//for instance habitTitle will first ask jQuery to find the element with id="addHabit-title", which is an <input> element
 		//since it is an <input> element, we can ask for it's "value" which will be what the user typed in the text field
@@ -110,7 +145,8 @@ app.processAddHabit = function(){
 
 		//this is the third variable. it will pull again from an <input> tag so we just use .val() which asks for the textfield value
 		var habitTarget = $("#addHabit-target").val();
-		var habitStarted = moment();
+		var habitUnit = $("#addHabit-unit").val();
+
 
 		//step 2 - validate some of the values.
 
@@ -121,8 +157,10 @@ app.processAddHabit = function(){
 		//in other words habitTitle = "" is SETTING the variable to empty, while habitTitle == "" is CHECKING if it's empty.
 		//lastly, the "return" makes sure the function no longer keeps executing. it basically says...
 		//stop here and go back to whoever called the function (ie. assume the function has ended)
-		if(habitTitle == ""){
-			alert("HEY I NEED YOU TO TAKE THIS SERIOUSLY!!!! CMON MAN!!");
+		
+
+		if(habitTitle === "" || habitType === "" || habitTarget === "" || habitUnit === ""){
+			$.afui.popup('We Need More Details');
 			return;
 		}
 
@@ -136,11 +174,9 @@ app.processAddHabit = function(){
 		//here we create a property "title" in this object "habitObj" to be equal to the variable "habitTitle"
 		habitObj.title = habitTitle;
 		habitObj.type = habitType;
-		habitObj.started = habitStarted;
 		habitObj.target = habitTarget;
-		habitObj.unit = "instance";
-		habitObj.log = []; 
-
+		habitObj.unit= habitUnit;
+		habitObj.log = [];
 		/*
 		REMEMBER: We are trying to build objects that look like the DUMMY data we created and are using to loop through
 		This is a habit object that when we get when we loop through habitList:
@@ -166,33 +202,17 @@ app.processAddHabit = function(){
 
 		//once we're done creating our habit object "habitObj" we can then add that object to our existing array of habit objects
 		//our existing array of habit objects is called "habitList" and was created in this file down below as hard-coded DUMMY data
-		model.processAddHabit(habitObj);
+		habitList.unshift(habitObj);
+        
 
+		
+        $.afui.loadContent("#home",false,false,"up");
 		//****************************
 		//WHAT'S NEXT? FOR HOMEWORK:
 		//finish adding the other properties to the habitObj (eg. type and target which you pulled form html form elements before)
 		//after added to habitList array (push) go back to the home panel AND refresh the list of habits so that the one we just added gets shown....
 		//****************************
 
-		//calling our internal app function to go to panel #home
-		app.go("#home");
-
-};
-
-
-//FUNCTION ADDED TO OBJECT
-//this function is called whenever the #addHabit panel gets loaded (ie. the "panelload" event is fired which triggers the function call
-app.showAddHabit = function(){
-
-	//find the #addHabit-action element (which is a button), and when it is "click" execute all of the code that will grab the form element values
-	//when we add the .on make sure to turn off any existing handlers with .off()
-	//why? this function may have been called before, and if so, there might already be a .on("click"), so we need to .off() first, and then .on again
-	//this way we avoid multiple .on(click) calls being made.....
-	$("#addHabit-action").off();
-	$("#addHabit-action").on("click", function(){
-		console.log("APP: Add habit button was called....");
-
-		app.processAddHabit();
 	});
 };
 
@@ -203,6 +223,7 @@ app.showAddHabit = function(){
 app.showHabits = function(){
 	console.log("APP: showHabits() called...");
 
+
 	//step 1 - loop through the variable "habitList" which is an array [] of several habit objects
 	//down below when we created habitList = [] and put several {} objects inside of it, it means that habitList is an "array of objects"
 	//by looping through the habitList, we are basically accessing habitList[0]... [1]...[2], which EACH represent a habit object {}
@@ -212,24 +233,19 @@ app.showHabits = function(){
 	var htmlOutput = "<ul class='list'>";
 
 	//now we loop through the habitList array, and at each iteration, add to our html variable "htmlOutput"
-	for(var x=0; x<model.habitList.length; x++){
+	for(var x=0; x<habitList.length; x++){
 
 		//add to the HTML variable that creates the <li> tag and be sure to dynamically display the title and type
 		//at this point, we are INSIDE the for loop, and so habitList[x] is actually equal to the habit object in slot x
 		//this means that to access the title property of the habit object, we can use habitList[x].title
 		//lastly, we are also creating an attribute "data-id" and setting it to the slot "x" so when we click on the <li>
 		//we will be able to pull the "data-id" attribute and know which habit item we clicked on... 
-		htmlOutput += "<li class='habit-item' data-id='"+x+"'><h1>" + model.habitList[x].title + "</h1> (" + model.habitList[x].type + ")" + "</li>";
+		htmlOutput += "<li class='habit-item' data-id='"+x+"'><h1>" + habitList[x].title + "</h1> (" + habitList[x].type + ")" + "</li>";
 	}
 
 	//we are now outside of the loop and we can finish our html by ending the <ul> tag that contains all of our <li> items
 	//<ul> = unorder list and <li> = list item
 	htmlOutput += "</ul>";
-
-
-	if(model.isHabitListEmpty() == true){
-		htmlOutput = "No habits....";
-	}
 
 	//with the htmlOutput variable finished, we can now have it displayed. we do this by setting the html of element "#habitList"
 	//equal to the "htmlOutput" variable
@@ -254,26 +270,28 @@ app.showHabits = function(){
 		//var habitID = event.currentTarget.getAttribute('data-id');
 		//var habitID = $(this).data("id");
 		var habitID = $(event.currentTarget).data("id");
-
-		//save this habit ID so we don't have to do this painful coding thing again....
-		model.setCurrentHabitObj(model.getHabitByID(habitID));
+		app.selectedHabitID = habitID;
 
 		//finally, now that we have the "data-id" value of the <li> (ie. habit object) clicked on we can send that to another function
 		//which will then acccess the habit object from the "habitList" array using the habitID value and create HTML to display
-		app.showHabitDetail();
+		app.showHabitDetail(habitID);
+		console.log(app.selectedHabitID);
 	});
 };
+
+
+
 
 
 //FUNCTION ADDED TO OBJECT
 //this function handles creating the HTML of all of a habit object's properties
 //it knows which slot to access the habit object because the id is equal to the slot value
 //in other words "habitList[id]" is either [0], [1], [2]... and it equals an actual habit object {} with properties .title .type, etc.
-app.showHabitDetail = function(){
-
+app.showHabitDetail = function(id){
+	alert(id);
 	//step 1 - access the habit object from the "habitList" array using the "id" value as the array slot number
-	 var habitObj = model.getCurrentHabitObj();
-
+	var habitObj = habitList[id];
+	console.log(id);
 
 	//step 2 - generate the HTML to display to element #habitDetail-output
 	//note that we are using the moment() library here. basically we are sending moment() a string "07-23-15", which is then
@@ -282,11 +300,13 @@ app.showHabitDetail = function(){
 	htmlOutput += "<h3>" + habitObj.title + "</h3>";
 	htmlOutput += "<div>Started: " + moment(habitObj.started).fromNow() + "</div>";
 	htmlOutput += "<div>Type: " + habitObj.type + "</div>";
+	htmlOutput += "<div>Target: " + habitObj.target +" "+ habitObj.unit + "</div>";
 	$("#habitDetail-output").html(htmlOutput);
 
 	//step 3 - lastly we want to treat the "log" property of the habit object differently from the others
 	//while the other properties were strings (eg., title = "Smoke less"), the property ".log" is an array
 	//this means that we need LOOP through the "habitObj.log" property to access the log objects {}
+	
 	var logOutput = "";
 	for(var w=0; w<habitObj.log.length; w++){
 		logOutput += "<div>";
@@ -299,68 +319,115 @@ app.showHabitDetail = function(){
 		logOutput += "<span> "+moment(habitObj.log[w].date).fromNow()+"</span>";
 
 		logOutput += "</div>";
-	}
+	};
 
-	if(habitObj.log.length == 0){
-		logOutput = "No log items...";
-	}
-
-
-	//step 4 - add event handler to our +++ add button so that it adds a log to the current habit object
-	$("#habitDetail-addLog-action").off().on("click", function(){
-		console.log("APP: Add log button was clicked on");
-
-		//call the function addHabitLog()
+    $("#addHabitLog-action").off();
+	$("#addHabitLog-action").on("click", function(){
+		console.log("APP: Add habit log for Habit ID #" + app.selectedHabitID + " button was called....");
+		console.log(habitObj.title + id);
 		app.addHabitLog();
-
 	});
-
-
 	//then we display the variable "logOutput" which holds all of our html for the log items
 	$("#habitDetail-log").html(logOutput)
 };
 
 
+
+
 app.addHabitLog = function(){
-	console.log("APP: addHabitLog called...");
 
-	//use the saved habitID to grab the habit object from the habitList array
-	var habitObj = model.getCurrentHabitObj();
-
-	//create temp object
+	var habitObj = habitList[app.selectedHabitID];
 	var tempLogObj = {};
-
-	//populate obj with crap
-	tempLogObj.date = moment();
-	tempLogObj.amount = 1;
-	tempLogObj.note = "";
-
-	//add temp log obj to the habit obj log array
+	tempLogObj.date= moment();
 	habitObj.log.push(tempLogObj);
-
-	if(habitObj.log.length > habitObj.target){
-		alert("DUDE!!! YOU ARE SO OVER YOUR TARGET: " + habitObj.target);
-	}
-
-	//refresh the display
-	//app.go("#home");
 	app.showHabitDetail(app.selectedHabitID);
+	$.afui.loadContent("#habitDetail",false,false,"up");
 
 };
 
- 
 
-app.go = function(panelid){
-	$.afui.loadContent(panelid, null, null, "none");
-};
+/*
+-----------------------------------------------------------------------------------------------------------------------
+
+TEMPORARY DUMMY VARIABLES (SAMPLE DATA)
+
+Until now, everything above has been about adding functions to the object "app"
+First we created app (var app = {}), and then we added functions app.goCrazy = function(){};
+
+//what we are doing below is creating what we call a DUMMY variable, which will hold some sample data that we can use
+//to test out our app and build all of the functionality. eventually this variable will be completely dynamic
+//in other words, we won't need to create DUMMY data because the app will actually allow us to add habit objects through
+//an interface, etc. 
+
+//for now we will leave this variable like this.. but eventually, we will no longer need this
+//instead we will use an empty array [] and EITHER load it's content from some SAVED location, OR have it
+//be created on-the-fly via our add habit functionality. 
+
+-----------------------------------------------------------------------------------------------------------------------
+*/
+
+var habitList = [
+	{
+		"title": "Smoke less",
+		"started": "07-15-2015",
+		"type": "decrease",
+		"target": 1,
+		"unit": "session",
+		"log": [
+			{
+				"date": "07-15-2015",
+				"amount": 1,
+				"note": ""
+			},
+			{
+				"date": "07-16-2015",
+				"amount": 1,
+				"note": ""
+			}
+		]
+	},
+	{
+		"title": "Dining outside",
+		"started": "07-14-2015",
+		"type": "decrease",
+		"target": 1,
+		"unit": "outing",
+		"log": [
+			{
+				"date": "07-16-2015",
+				"amount": 1,
+				"note": ""
+			},
+			{
+				"date": "07-14-2015",
+				"amount": 1,
+				"note": ""
+			}
+		]
+	},
+	{
+		"title": "Exercise",
+		"started": "07-12-2015",
+		"type": "increase",
+		"target": 1,
+		"unit": "session",
+		"log": [
+			{
+				"date": "07-12-2015",
+				"amount": 1,
+				"note": ""
+			},
+			{
+				"date": "07-15-2015",
+				"amount": 1,
+				"note": ""
+			}
+		]
+	}
+];
 
 
-
-
-
-
-
-
+localStorage.setItem('test',habitList);
 
 
 

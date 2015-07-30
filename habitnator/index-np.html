@@ -16,12 +16,11 @@
     <link rel="stylesheet" type="text/css" href="build/nyu.ui.css" />
 
      <script type="text/javascript" charset="utf-8" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-    <script type="text/javascript" charset="utf-8" src="https://rawgit.com/ftlabs/fastclick/master/lib/fastclick.js"></script>
+    <!--<script type="text/javascript" charset="utf-8" src="https://rawgit.com/ftlabs/fastclick/master/lib/fastclick.js"></script>-->
     <script type="text/javascript" charset="utf-8" src="src/af.shim.js"></script>
     <script type="text/javascript" charset="utf-8" src="src/af.ui.js"></script>
 
-    <script type="text/javascript" charset="utf-8" src="src/nyu.controller.js"></script>
-    <script type="text/javascript" charset="utf-8" src="src/nyu.model.js"></script>
+    <script type="text/javascript" charset="utf-8" src="src/nyu.controller.np.js"></script>
 
     <script src="src/af.desktopBrowsers.js"></script>
     <script type="text/javascript" charset="utf-8" src="src/af.actionsheet.js"></script>
@@ -118,24 +117,37 @@
                         <option value="increase">Improve this habit</option>
                     </select>
                 </div>
+
+                
                 <div class="form-group">
                     How many times a day would be ideal:
                     <input type="number" size="5" placeholder="5" id="addHabit-target"/>
-                </div>
+                </div> 
+               
+
                 <div class="form-group">
-                    <a href="#" class="button" id="addHabit-action">ADD HABIT</a>
+                    <span class="form-label">How do you measure this habit?</span>
+                    <input type="text" id="addHabit-unit" placeholder="Sessions, outings, occurences..."/>
+                </div>
+
+                <div class="form-group">
+                    <a class="button" id="addHabit-action">ADD HABIT</a>
                 </div>
 
             </div>
 
 
             <!-- HABIT DETAIL -->
-            <div class="panel" id="habitDetail">
+            <div class="panel" id="habitDetail"> 
+                
                 <div id="habitDetail-output">
                 </div>
-
-                <a href="#" class="button" id="habitDetail-addLog-action">++ ADD ++</a>
-
+                    <div class="form-group">
+                    <a class="button" id="addHabitLog-action">LOG HABIT</a>
+                    </div>
+                <br>
+                <br>
+               <h4 style=text-align:center>Activity Log:</h4>
                 <div id="habitDetail-log">
                 </div>
             </div>

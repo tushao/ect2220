@@ -4,6 +4,14 @@
 		"selected_items":
 		[
 			[
+				"temp",
+				"tempLogObj"
+			],
+			[
+				"select",
+				"selectedHabitID"
+			],
+			[
 				"per",
 				"peopleListLarge"
 			],
@@ -130,10 +138,6 @@
 			[
 				"tex",
 				"text-align"
-			],
-			[
-				"select",
-				"selectDisabledFeature"
 			],
 			[
 				"subheader",
@@ -344,26 +348,18 @@
 	"buffers":
 	[
 		{
-			"file": "inclass/class5/index.html",
+			"file": "habitnator/index-np.html",
 			"settings":
 			{
-				"buffer_size": 5487,
-				"line_ending": "Unix"
+				"buffer_size": 8261,
+				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "inclass/class5/build/nyu.ui.css",
+			"file": "habitnator/src/nyu.controller.np.js",
 			"settings":
 			{
-				"buffer_size": 324,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "inclass/class5/src/nyu.controller.js",
-			"settings":
-			{
-				"buffer_size": 3800,
+				"buffer_size": 18656,
 				"line_ending": "Unix"
 			}
 		}
@@ -395,13 +391,17 @@
 	},
 	"file_history":
 	[
-		"/web/ect2220/inclass/class4/styles.css",
-		"/web/ect2220/inclass/class4/controller.js",
+		"/web/ect2220/habitnator/src/moment.min.js",
 		"/web/ect2220/habitnator/src/nyu.controller.js",
 		"/web/ect2220/habitnator/index.html",
-		"/web/ect2220/inclass/class5/build/nyu.ui.css",
+		"/web/ect2220/habitnator/build/nyu.ui.css",
+		"/web/ect2220/habitnator/src/moment.js",
 		"/web/ect2220/inclass/class5/src/nyu.controller.js",
+		"/web/ect2220/inclass/class4/controller.js",
 		"/web/ect2220/inclass/class5/index.html",
+		"/web/ect2220/inclass/class6/src/nyu.controller.js",
+		"/web/ect2220/inclass/class5/build/nyu.ui.css",
+		"/web/ect2220/inclass/class4/styles.css",
 		"/web/ect2220/inclass/styles.css",
 		"/web/ect2220/inclass/class5/controller.js",
 		"/web/ect2220/inclass/class4/sampledata.js",
@@ -412,7 +412,6 @@
 		"/web/ect2220/exercises/exercise1.html",
 		"/web/ect2220/inclass/Class 4/index.html",
 		"/web/ect2220/inclass/Class 4/model.js",
-		"/web/ect2220/habitnator/build/nyu.ui.css",
 		"/web/ect2220/inclass/temp.html",
 		"/web/ect2220/exercises/exercise3.html",
 		"/web/ect2220/exercises/exercise2.html",
@@ -513,7 +512,7 @@
 	],
 	"find":
 	{
-		"height": 23.0
+		"height": 35.0
 	},
 	"find_in_files":
 	{
@@ -528,6 +527,8 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"showHabitDetail",
+			"panel",
 			"<ul class=\"list\">\n			    \n			    	<!--\n			    	Removed:\n			    	onclick=\"$(this).closest('.swipe-reveal').remove()\" from the <li>\n			    	no clue what it does!!!\n			    	-->\n	            	<li class=\"swipe-reveal\">\n					    <div class=\"swipe-content\">Dining outside</div>\n					    <div class=\"swipe-hidden\">\n					        <a class=\"button archive\" onclick=\"$(this).closest('.swipe-reveal').remove()\">Delete</a>\n					    </div>\n					</li>\n					<li class=\"swipe-reveal\">\n					    <div class=\"swipe-content\">Dining outside</div>\n					    <div class=\"swipe-hidden\">\n					        <a class=\"button archive\" onclick=\"$(this).closest('.swipe-reveal').remove()\">Delete</a>\n					    </div>\n					</li>\n					<li class=\"swipe-reveal\">\n					    <div class=\"swipe-content\">Dining outside</div>\n					    <div class=\"swipe-hidden\">\n					        <a class=\"button archive\" onclick=\"$(this).closest('.swipe-reveal').remove()\">Delete</a>\n					    </div>\n					</li>\n					<li class=\"swipe-reveal\">\n					    <div class=\"swipe-content\">Dining outside</div>\n					    <div class=\"swipe-hidden\">\n					        <a class=\"button archive\" onclick=\"$(this).closest('.swipe-reveal').remove()\">Delete</a>\n					    </div>\n					</li>\n			  </ul>",
 			"saveExistingChallengeEnrollmentAsCompleted",
 			"processChallengeCloseCompletion",
@@ -653,9 +654,7 @@
 			"saveExistingChallengeEnrollmentAsCompleted",
 			"saveNewToYouLog",
 			"saveExistingChallengeEnrollmentAsCompleted",
-			"model.processChallengeCurrentCompleted",
-			"saveExistingChallengeEnrollmentAsCompleted",
-			"processChallengeCloseCompletion"
+			"model.processChallengeCurrentCompleted"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -676,24 +675,24 @@
 	"groups":
 	[
 		{
-			"selected": 2,
+			"selected": 1,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "inclass/class5/index.html",
+					"file": "habitnator/index-np.html",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 5487,
+						"buffer_size": 8261,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								5357,
-								5376
+								1256,
+								1256
 							]
 						],
 						"settings":
@@ -703,7 +702,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 1844.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 1,
@@ -711,57 +710,28 @@
 				},
 				{
 					"buffer": 1,
-					"file": "inclass/class5/build/nyu.ui.css",
+					"file": "habitnator/src/nyu.controller.np.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 324,
+						"buffer_size": 18656,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								290,
-								290
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/CSS/CSS.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "inclass/class5/src/nyu.controller.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 3800,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								484,
-								484
+								16641,
+								16641
 							]
 						],
 						"settings":
 						{
 							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"translate_tabs_to_spaces": false,
-							"word_wrap": true
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 4561.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
