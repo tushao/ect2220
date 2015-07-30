@@ -336,11 +336,7 @@ app.addHabitLog = function(){
 	tempLogObj.note = "";
 
 	//add temp log obj to the habit obj log array
-	habitObj.log.push(tempLogObj);
-
-	if(habitObj.log.length > habitObj.target){
-		alert("DUDE!!! YOU ARE SO OVER YOUR TARGET: " + habitObj.target);
-	}
+	model.processAddHabitLog(tempLogObj);
 
 	//refresh the display
 	//app.go("#home");

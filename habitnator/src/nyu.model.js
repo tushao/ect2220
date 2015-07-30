@@ -47,3 +47,12 @@ model.isHabitListEmpty = function(){
 		return false;
 	}
 }
+
+model.processAddHabitLog = function(logObj){
+	model.currentHabitObj.log.push(logObj);
+	model.saveHabits();
+};
+
+
+
+
