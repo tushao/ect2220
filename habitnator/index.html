@@ -37,6 +37,8 @@
 
     <script type="text/javascript" charset="utf-8" src="src/moment.min.js"></script>
 
+    <script src="src/Chart.js"></script>
+
     <script>
 
         //set properties of the $.afui object (app framework library)
@@ -89,14 +91,13 @@
     <div class="view" id="homeView">
     	<header>
             <h1>Habitnator</h1>
+            <a class="header-button-right" href="#addHabit" class="button">Add</a>
         </header>
 
         <div class="pages">
 
             <!-- HOME PANEL -->
             <div class="panel" id="home">
-                <a href="#addHabit" class="button">Add</a>
-                
                 <!--this div tag is what will hold our dynamic list of habit objects populated by app.showHabits()-->
                 <div id="habitList">
                 </div>
@@ -127,22 +128,35 @@
                 </div>
 
             </div>
-
-
-            <!-- HABIT DETAIL -->
-            <div class="panel" id="habitDetail">
-                <div id="habitDetail-output">
-                </div>
-
-                <a href="#" class="button" id="habitDetail-addLog-action">++ ADD ++</a>
-
-                <div id="habitDetail-log">
-                </div>
-            </div>
-
         <!--end pages-->
         </div>
     <!--end view-->
+    </div>
+
+    <div class="view" id="detailsView">
+        <header>
+            <a href="#home" data-transition="slide" class="button">Back</a>
+            <h1>Habitnator</h1>
+        </header>
+
+        <div class="pages">
+            <!-- HABIT DETAIL -->
+            <div class="panel" id="habitDetail">
+                <br>
+                <div id="habitDetail-today" class="card">
+                    
+                </div>
+
+                <div id="habitDetail-week" class="card">
+                    <div class="card-header">WEEKLY</div>
+                    <div class="card-subheader">target number: <span id="weeklyChart-target"></span></div>
+                    <canvas id="weeklyChart" width="450" height="320"></canvas>
+                </div>
+
+                <a href="#" class="button" id="habitDetail-addLog-action">+ ADD INSTANCE</a>
+
+            </div>
+        </div>
     </div>
 
 

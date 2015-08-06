@@ -19,3 +19,48 @@
 .form-group{
 	padding: 10px;
 }
+
+.increaseHabitClass{
+	border: 1px solid #13BF72;
+    margin: 4px;
+    background-color: #EDFAEF;
+}
+
+.decreaseHabitClass{
+	border: 1px solid #ad4640;
+    margin: 4px;
+    background-color: #FFF0F0;
+}
+
+.header-button-right{
+	float: right;
+    padding: 10px;
+    background-color: #ffffff !important;
+    margin: 3px 5px 0px 0px;
+    border-radius: 10px
+}
+
+
+.card-header{
+	font-size: 20px;
+    color: #888888;
+    font-weight: 200
+}
+
+.card-subheader{
+	font-size: 13px;
+    color: #888888;
+    font-weight: 200
+}
+
+.card-icon{
+	width: 80px;
+}
+
+
+/*
+AFUI Override
+*/
+.header{
+
+}

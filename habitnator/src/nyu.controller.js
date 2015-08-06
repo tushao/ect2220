@@ -18,19 +18,10 @@ through event listners and directly through function calls
 -----------------------------------------------------------------------------------------------------------------
 
 
-Class 8 In-Class
-
-Individual Coding
-- Remove all the hard-coded data, and only use dynamic data (hint: clear out the arrays)
-- When there are no habits, display a message
-- When there are no log items for a habit, display a message
-
-Group Coding
-- Implement model and local storage
+Class 9 In-Class
 
 
-HW
-- Implement logic and CSS to configure the UI for a habit DETAIL
+
 
 
 -----------------------------------------------------------------------------------------------------------
@@ -194,6 +185,8 @@ app.showAddHabit = function(){
 
 		app.processAddHabit();
 	});
+
+	$("#addHabit-title").val('');
 };
 
 
@@ -219,7 +212,16 @@ app.showHabits = function(){
 		//this means that to access the title property of the habit object, we can use habitList[x].title
 		//lastly, we are also creating an attribute "data-id" and setting it to the slot "x" so when we click on the <li>
 		//we will be able to pull the "data-id" attribute and know which habit item we clicked on... 
-		htmlOutput += "<li class='habit-item' data-id='"+x+"'><h1>" + model.habitList[x].title + "</h1> (" + model.habitList[x].type + ")" + "</li>";
+
+		var typeClass = "";	//either going to be increaseHabitClass or a decreaseHabitClass
+		if(model.habitList[x].type == "increase"){
+			typeClass = "increaseHabitClass";
+		}else{
+			typeClass = "decreaseHabitClass";
+		}
+
+		//htmlOutput += "<li class='habit-item "+typeClass+"' data-id='"+x+"'><h1>" + model.habitList[x].title + "</h1> (" + model.habitList[x].type + ")" + "</li>";
+		htmlOutput += "<li class='habit-item "+typeClass+"' data-id='"+x+"'><a href='#'><h1>" + model.habitList[x].title + "</h1> (" + model.habitList[x].type + ")" + "</a></li>";
 	}
 
 	//we are now outside of the loop and we can finish our html by ending the <ul> tag that contains all of our <li> items
@@ -244,10 +246,6 @@ app.showHabits = function(){
 	//remember that we dynamically assigned the "data-id" to be equal to the array slot "x" value within the <li> html tag
 	$(".habit-item").on("click", function(event){
 
-		//change the page to panel #habitDetail
-		//we are using the built-in $.afui function called "loadContent" which takes in the id (#habitDetail) of panel to load
-		$.afui.loadContent("#habitDetail",false,false,"up");
-
 		//now that the #habitDetail page is loaded, we need to make sure the actual information for the habit object selected is displayed
 		//first we need to know... which habit was clicked on? we do this by grabbing the value "data-id" from the <li> tag
 		//we can do this different ways.... 
@@ -258,9 +256,9 @@ app.showHabits = function(){
 		//save this habit ID so we don't have to do this painful coding thing again....
 		model.setCurrentHabitObj(model.getHabitByID(habitID));
 
-		//finally, now that we have the "data-id" value of the <li> (ie. habit object) clicked on we can send that to another function
-		//which will then acccess the habit object from the "habitList" array using the habitID value and create HTML to display
-		app.showHabitDetail();
+		//change the page to panel #habitDetail
+		//we are using the built-in $.afui function called "loadContent" which takes in the id (#habitDetail) of panel to load
+		$.afui.loadContent("#habitDetail",false,false,"up");
 	});
 };
 
@@ -272,53 +270,82 @@ app.showHabits = function(){
 app.showHabitDetail = function(){
 
 	//step 1 - access the habit object from the "habitList" array using the "id" value as the array slot number
-	 var habitObj = model.getCurrentHabitObj();
+	var habitObj = model.getCurrentHabitObj();
+	console.log("--------------------------------------");
+	console.log("HabitObj:");
+	console.log(habitObj);
 
+	//generate the HTML output for today
+	var htmlToday = app.generateHabitDetailToday(habitObj);
+	$("#habitDetail-today").html(htmlToday);
 
-	//step 2 - generate the HTML to display to element #habitDetail-output
-	//note that we are using the moment() library here. basically we are sending moment() a string "07-23-15", which is then
-	//converted to a date/time object that we can call fromNow() on... and get a string like "X days from now"...
-	var htmlOutput = "";
-	htmlOutput += "<h3>" + habitObj.title + "</h3>";
-	htmlOutput += "<div>Started: " + moment(habitObj.started).fromNow() + "</div>";
-	htmlOutput += "<div>Type: " + habitObj.type + "</div>";
-	$("#habitDetail-output").html(htmlOutput);
-
-	//step 3 - lastly we want to treat the "log" property of the habit object differently from the others
-	//while the other properties were strings (eg., title = "Smoke less"), the property ".log" is an array
-	//this means that we need LOOP through the "habitObj.log" property to access the log objects {}
-	var logOutput = "";
-	for(var w=0; w<habitObj.log.length; w++){
-		logOutput += "<div>";
-
-		//here is where we access the habit object's log objects' properties
-		//remember we are INSIDE a loop here so.... habitObj = the habit object we clicked on to see its detail
-		//and habitObj.log[w] is based on the current iteration so habitObj.log[0] is the first log item in the
-		//habit object's propery "log" which is an array. whe... got that? hope so...
-		logOutput += habitObj.log[w].amount + " " + habitObj.unit;
-		logOutput += "<span> "+moment(habitObj.log[w].date).fromNow()+"</span>";
-
-		logOutput += "</div>";
-	}
-
-	if(habitObj.log.length == 0){
-		logOutput = "No log items...";
-	}
-
-
-	//step 4 - add event handler to our +++ add button so that it adds a log to the current habit object
-	$("#habitDetail-addLog-action").off().on("click", function(){
-		console.log("APP: Add log button was clicked on");
-
-		//call the function addHabitLog()
-		app.addHabitLog();
-
-	});
-
-
-	//then we display the variable "logOutput" which holds all of our html for the log items
-	$("#habitDetail-log").html(logOutput)
 };
+
+
+app.generateHabitDetailToday = function(habitObj){
+	//step 2 - calculate the today metric and output it
+	//if it's decrease then I want log to be less than or equal to target
+	//if it's increase then I want log length to be greater or equal to target 
+
+	//today habit length
+	//numbet of objects in log array whose date matches today's date
+		//loop through all of the log items in the current habit object
+			//check to see if the habit.date is equal to today's date 
+	var todaysDate = moment();
+	var todayHabitLength = 0;
+	var targetHabitLength = habitObj.target;
+
+	console.log("TODAY's Date: " + todaysDate.format('M-D-YY'));
+	console.log("LOG ITEMS: " + habitObj.log.length);
+
+	for(var x=0; x<habitObj.log.length; x++){
+		var isLogToday = moment(habitObj.log[x].date).isSame(todaysDate, 'day');
+		console.log("LOG DATE: " + moment(habitObj.log.date).format('M-D-YY'));
+		console.log("IS THIS IS MATCH FOR TODAY?? " + isLogToday);
+		if(isLogToday == true){
+			todayHabitLength++;
+		}
+	}	
+	
+	//if it's on target output positive image
+	//if it's not on target a neagtive image
+	//also as a note output log.length / target
+	console.log("TARGET FOR HABIT: " + targetHabitLength);
+	var iconPositive = "<img class='card-icon' src='build/images/thumbsup.png' />";
+	var iconNegative = "<img class='card-icon' src='build/images/thumbsdown.png' />";
+	var htmlToday = "<div class='card-header'>TODAY</div>";
+
+	switch(habitObj.type){
+
+		case "increase":
+			if(todayHabitLength >= targetHabitLength){
+				htmlToday += iconPositive;
+			}else{
+				htmlToday += iconNegative;
+			}
+			break;
+
+		case "decrease":
+			if(todayHabitLength <= targetHabitLength){
+				htmlToday += iconPositive;
+			}else{
+				htmlToday += iconNegative;
+			}
+			break;
+	}
+	
+	htmlToday += "<div class='card-subheader'>(" + todayHabitLength + "/" + targetHabitLength + ")</div>"
+
+	return htmlToday;
+};
+
+app.generateHabitDetailWeekly = function(habitObj){
+
+
+
+};
+
+
 
 
 app.addHabitLog = function(){
@@ -341,7 +368,6 @@ app.addHabitLog = function(){
 	//refresh the display
 	//app.go("#home");
 	app.showHabitDetail(app.selectedHabitID);
-
 };
 
  
@@ -349,8 +375,6 @@ app.addHabitLog = function(){
 app.go = function(panelid){
 	$.afui.loadContent(panelid, null, null, "none");
 };
-
-
 
 
 

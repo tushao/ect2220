@@ -1,8 +1,6 @@
 var model = {
-
 	habitList: [],
 	currentHabitObj: {}
-
 };
 
 
@@ -34,11 +32,11 @@ model.getHabitByID = function(habitID){
 
 model.setCurrentHabitObj = function(habitObj){
 	model.currentHabitObj = habitObj;
-}
+};
 
 model.getCurrentHabitObj = function(){
 	return model.currentHabitObj;
-}
+};
 
 model.isHabitListEmpty = function(){
 	if(model.habitList.length == 0){
@@ -46,12 +44,13 @@ model.isHabitListEmpty = function(){
 	}else{
 		return false;
 	}
-}
+};
 
 model.processAddHabitLog = function(logObj){
 	model.currentHabitObj.log.push(logObj);
 	model.saveHabits();
 };
+
 
 
 
