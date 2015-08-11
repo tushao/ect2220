@@ -4,6 +4,22 @@
 		"selected_items":
 		[
 			[
+				"dSa",
+				"dSatData"
+			],
+			[
+				"dFri",
+				"dFriData"
+			],
+			[
+				"dThurs",
+				"dThursData"
+			],
+			[
+				"dMon",
+				"dMonData"
+			],
+			[
 				"icon",
 				"iconNegative"
 			],
@@ -372,34 +388,18 @@
 	"buffers":
 	[
 		{
+			"file": "habitnatorapp/www/index.html",
+			"settings":
+			{
+				"buffer_size": 8559,
+				"line_ending": "Unix"
+			}
+		},
+		{
 			"file": "habitnator/index.html",
 			"settings":
 			{
-				"buffer_size": 8087,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "habitnator/src/nyu.controller.js",
-			"settings":
-			{
-				"buffer_size": 18005,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "habitnator/build/nyu.ui.css",
-			"settings":
-			{
-				"buffer_size": 556,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "habitnator/src/nyu.model.js",
-			"settings":
-			{
-				"buffer_size": 997,
+				"buffer_size": 8559,
 				"line_ending": "Unix"
 			}
 		}
@@ -431,14 +431,22 @@
 	},
 	"file_history":
 	[
+		"/web/ect2220/inclass/class10/styles.css",
+		"/web/ect2220/inclass/class10/controller.js",
+		"/web/ect2220/inclass/class10/index.html",
+		"/web/ect2220/class10.js",
+		"/web/ect2220/habitnator/src/nyu.controller.js",
+		"/web/ect2220/habitnator/index.html",
+		"/web/ect2220/inclass/class10/Chart.js",
+		"/web/ect2220/inclass/class10/sampledata.js",
+		"/web/ect2220/habitnator/build/nyu.ui.css",
+		"/web/ect2220/habitnator/src/nyu.model.js",
+		"/web/ect2220/habitnator/src/Chart.js",
 		"/web/ect2220/habitnator/test.html",
 		"/web/ect2220/habitnator/src/nyu.controller.np.js",
 		"/web/ect2220/exercises/exercise1.html",
-		"/web/ect2220/habitnator/index.html",
 		"/web/ect2220/habitnator/index-np.html",
 		"/web/ect2220/habitnator/src/moment.min.js",
-		"/web/ect2220/habitnator/src/nyu.controller.js",
-		"/web/ect2220/habitnator/build/nyu.ui.css",
 		"/web/ect2220/habitnator/src/moment.js",
 		"/web/ect2220/inclass/class5/src/nyu.controller.js",
 		"/web/ect2220/inclass/class4/controller.js",
@@ -550,8 +558,7 @@
 		"/web/seekchange/dara_2.0/www/js/index.js",
 		"/web/seekchange/seekchange_v2.1/platforms/android/assets/www/css/index.css",
 		"/seekchange_old/apps/dara_1.1/www/css/navigation.css",
-		"/web/seekchange/seekchange_v2.1/platforms/android/assets/www/activities/moodtracker/checkin.html",
-		"/web/seekchange/seekchange_v2.1/platforms/android/assets/www/index.html"
+		"/web/seekchange/seekchange_v2.1/platforms/android/assets/www/activities/moodtracker/checkin.html"
 	],
 	"find":
 	{
@@ -570,6 +577,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"showHabitDetail",
 			"processAddHabit",
 			"habitList",
 			"showHabitDetail",
@@ -696,8 +704,7 @@
 			"model.getChallenge",
 			"triggerMainBackgroundChange",
 			"checkin-button",
-			"saveExistingChallengeEnrollmentAsCompleted",
-			"saveNewToYouLog"
+			"saveExistingChallengeEnrollmentAsCompleted"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -723,19 +730,19 @@
 			[
 				{
 					"buffer": 0,
-					"file": "habitnator/index.html",
+					"file": "habitnatorapp/www/index.html",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 8087,
+						"buffer_size": 8559,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								5707,
-								5690
+								2393,
+								2336
 							]
 						],
 						"settings":
@@ -745,7 +752,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 1921.0,
+						"translation.y": 94.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 1,
@@ -753,88 +760,32 @@
 				},
 				{
 					"buffer": 1,
-					"file": "habitnator/src/nyu.controller.js",
+					"file": "habitnator/index.html",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 18005,
+						"buffer_size": 8559,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								14776,
-								14776
+								8543,
+								8543
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"translate_tabs_to_spaces": false
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 4366.0,
+						"translation.y": 2629.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "habitnator/build/nyu.ui.css",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 556,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								554,
-								554
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/CSS/CSS.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "habitnator/src/nyu.model.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 997,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								31,
-								46
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
 					"type": "text"
 				}
 			]

@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<!--HTML5 doctype-->
+<html>
+
+<head>
+
+    <title>Habitnator</title>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, minimal-ui">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link rel="stylesheet" type="text/css" href="build/icons.css" />
+
+    <link rel="stylesheet" type="text/css" href="build/af.ui.css" />
+    <link rel="stylesheet" type="text/css" href="build/nyu.ui.css" />
+
+     <script type="text/javascript" charset="utf-8" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <!--<script type="text/javascript" charset="utf-8" src="https://rawgit.com/ftlabs/fastclick/master/lib/fastclick.js"></script>-->
+    <script type="text/javascript" charset="utf-8" src="src/af.shim.js"></script>
+    <script type="text/javascript" charset="utf-8" src="src/af.ui.js"></script>
+
+    <script type="text/javascript" charset="utf-8" src="src/nyu.controller.np.js"></script>
+
+    <script src="src/af.desktopBrowsers.js"></script>
+    <script type="text/javascript" charset="utf-8" src="src/af.actionsheet.js"></script>
+    <script type="text/javascript" charset="utf-8" src="src/af.animation.js"></script>
+    <script type="text/javascript" charset="utf-8" src="src/af.touchEvents.js"></script>
+    <script type="text/javascript" charset="utf-8" src="src/af.popup.js"></script>
+    <script type="text/javascript" charset="utf-8" src="src/af.drawer.js"></script>
+    <script type="text/javascript" charset="utf-8" src="src/af.toast.js"></script>
+    <script type="text/javascript" charset="utf-8" src="src/af.animateheader.js"></script>
+    <script type="text/javascript" charset="utf-8" src="src/af.splashscreen.js"></script>
+    <script type="text/javascript" charset="utf-8" src="src/af.swipereveal.js"></script>
+    <script type="text/javascript" charset="utf-8" src="src/af.lockscreen.js"></script>
+
+    <script type="text/javascript" charset="utf-8" src="src/moment.min.js"></script>
+
+    <script>
+
+        //set properties of the $.afui object (app framework library)
+        $.afui.useOSThemes=false;
+        $.afui.loadDefaultHash=false;
+        $.afui.autoLaunch=false;
+
+        //check search - ignore this for now....
+        var search=document.location.search.toLowerCase().replace("?","");
+        if(search.length>0)
+        {
+           $.afui.useOSThemes=true;
+            if(search=="win8")
+                $.os.ie=true;
+            else if(search=="firefox")
+                $.os.fennec="true"
+            $.afui.ready(function(){
+                $(document.body).get(0).className=(search);
+            });
+        }
+
+        //OUR FIRST STEP IS HERE
+        //this where our app actually gets started. basically what we are saying here is... 
+        //when the document is ready (ie. all the content and javascript files are loaded)
+        //call the app.intialize() function which was declared in the "nyu.controller.js" file called via <script src=""> tag earlier
+        $(document).ready(function(){
+            app.initialize();
+        });
+
+    </script>
+</head>
+
+<body >
+
+    <!-- SPLASH SCREEN - this is a unique <div> tag that afui uses to display before any panel is loaded -->
+    <div id="splashscreen" class='ui-loader heavy'>
+	    Habitnator
+	    <br>
+	    <br>
+	    <span class='ui-icon ui-icon-loading spin'></span>
+	    <h1>Starting app</h1>
+	</div>
+
+
+    <!-- HOME VIEW - a view contains pages, which contains panels 
+    Basically you want to make sure that <div class="view"> encapsulates <div class"pages"> which then encapsulates
+    one or more <div class="panel"> 
+    it's the "panels" that will contain all of our content
+     -->
+    <div class="view" id="homeView">
+    	<header>
+            <h1>Habitnator</h1>
+        </header>
+
+        <div class="pages">
+
+            <!-- HOME PANEL -->
+            <div class="panel" id="home">
+                <a href="#addHabit" class="button">Add</a>
+                
+                <!--this div tag is what will hold our dynamic list of habit objects populated by app.showHabits()-->
+                <div id="habitList">
+                </div>
+            </div>
+
+
+            <!-- ADD HABIT -->
+            <div class="panel" id="addHabit">
+	           
+               <h2>Add Habit</h2>
+                <div class="form-group">
+                    <span class="form-label">What habit are you targeting?</span>
+                    <input type="text" id="addHabit-title" placeholder="Smoke less"/>
+                </div>
+                <div class="form-group">
+                    Your goal is to:
+                    <select id="addHabit-type">
+                        <option value="decrease">Stop this habit</option>
+                        <option value="increase">Improve this habit</option>
+                    </select>
+                </div>
+
+                
+                <div class="form-group">
+                    How many times a day would be ideal:
+                    <input type="number" size="5" placeholder="5" id="addHabit-target"/>
+                </div> 
+               
+
+                <div class="form-group">
+                    <span class="form-label">How do you measure this habit?</span>
+                    <input type="text" id="addHabit-unit" placeholder="Sessions, outings, occurences..."/>
+                </div>
+
+                <div class="form-group">
+                    <a class="button" id="addHabit-action">ADD HABIT</a>
+                </div>
+
+            </div>
+
+
+            <!-- HABIT DETAIL -->
+            <div class="panel" id="habitDetail"> 
+                
+                <div id="habitDetail-output">
+                </div>
+                    <div class="form-group">
+                    <a class="button" id="addHabitLog-action">LOG HABIT</a>
+                    </div>
+                <br>
+                <br>
+               <h4 style=text-align:center>Activity Log:</h4>
+                <div id="habitDetail-log">
+                </div>
+            </div>
+
+        <!--end pages-->
+        </div>
+    <!--end view-->
+    </div>
+
+
+    <!--
+    INTROVIEW: This is where we have an entirely new "view" with it's own "pages" and "panels"
+    Remember: that panels within the same view SHARE a <header> and <footer>
+    -->
+    <div class="view" id="introView">
+
+        <!--header shared by all panels in this view-->
+        <header><h1>Habitnator</h1></header>
+
+
+        <div class="pages">
+
+            <!--INTRO -->
+            <div class="panel" id="intro">
+
+                <div id="intro-screen-1" class="intro-screen">
+                    <div class="intro-header">
+                        HABIT ARE HARD TO CHANGE
+                    </div>
+                    <div class="intro-text">
+                        blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah 
+                    </div>
+                </div>
+
+                <div id="intro-screen-2" class="intro-screen">
+                    <div class="intro-header">
+                        TRACKING IS THE BEST
+                    </div>
+                    <div class="intro-text">
+                        blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah 
+                    </div>
+                </div>
+
+                <div id="intro-screen-3" class="intro-screen">
+                    <div class="intro-header">
+                        SCIENCE IS ON YOUR SIDE
+                    </div>
+                    <div class="intro-text">
+                        blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah 
+                    </div>
+                </div>
+            </div>
+
+        <!--end pages-->
+        </div>
+    <!--end view-->
+    </div>
+
+
+</body>
+</html>

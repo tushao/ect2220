@@ -1,0 +1,52 @@
+<!--
+
+Resources:
+http://www.jsoneditoronline.org/
+http://www.secretgeek.net/json_3mins
+
+Covers:
+- Display data from JSON to HTML objects
+- Display data from an array to HTML objects
+- Use a loop to sift through data in array
+- Use variable to page through larger data set
+
+-->
+
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="styles.css" />
+	<script type="text/javascript" charset="utf-8" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script type="text/javascript" src="controller.js"></script>
+
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+	<script>
+	$(document).ready(function(){
+		app.init();
+	});
+	</script>
+</head>
+<body>
+
+<h2><span id="question-title-output"></span></h2>
+
+
+<div id="choices-output">
+</div>
+
+
+<a href="#" class="button" id="submit-choice-btn">Submit</a>
+
+<div id="joke-result">
+
+</div>
+
+</body>
+</html>
