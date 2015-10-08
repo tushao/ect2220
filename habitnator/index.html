@@ -14,6 +14,7 @@
 
     <link rel="stylesheet" type="text/css" href="build/af.ui.css" />
     <link rel="stylesheet" type="text/css" href="build/nyu.ui.css" />
+    <link rel="stylesheet" type="text/css" href="build/fullcalendar.css" />
 
      <script type="text/javascript" charset="utf-8" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script type="text/javascript" charset="utf-8" src="https://rawgit.com/ftlabs/fastclick/master/lib/fastclick.js"></script>
@@ -22,6 +23,7 @@
 
     <script type="text/javascript" charset="utf-8" src="src/nyu.controller.js"></script>
     <script type="text/javascript" charset="utf-8" src="src/nyu.model.js"></script>
+
 
     <script src="src/af.desktopBrowsers.js"></script>
     <script type="text/javascript" charset="utf-8" src="src/af.actionsheet.js"></script>
@@ -36,18 +38,16 @@
     <script type="text/javascript" charset="utf-8" src="src/af.lockscreen.js"></script>
 
     <script type="text/javascript" charset="utf-8" src="src/moment.min.js"></script>
-
-    <script src="https://da189i1jfloii.cloudfront.net/js/kinvey-phonegap-1.4.4.min.js"></script>
-
-    <script src="src/Chart.js"></script>
+    <script type="text/javascript" charset="utf-8" src="src/Chart.js"></script>
+    <!-- // <script type="text/javascript" src="src/jquery.min.js"></script> -->
+    <script type="text/javascript" src="src/fullcalendar.js"></script>
+    <script type="text/javascript" src="src/gcal.js"></script>
 
     <script>
-
         //set properties of the $.afui object (app framework library)
         $.afui.useOSThemes=false;
         $.afui.loadDefaultHash=false;
         $.afui.autoLaunch=false;
-
         //check search - ignore this for now....
         var search=document.location.search.toLowerCase().replace("?","");
         if(search.length>0)
@@ -61,7 +61,6 @@
                 $(document.body).get(0).className=(search);
             });
         }
-
         //OUR FIRST STEP IS HERE
         //this where our app actually gets started. basically what we are saying here is... 
         //when the document is ready (ie. all the content and javascript files are loaded)
@@ -69,7 +68,6 @@
         $(document).ready(function(){
             app.initialize();
         });
-
     </script>
 </head>
 
@@ -93,15 +91,19 @@
     <div class="view" id="homeView">
     	<header>
             <h1>Habitnator</h1>
-            <a class="header-button-right" href="#addHabit" class="button">Add</a>
         </header>
 
         <div class="pages">
 
             <!-- HOME PANEL -->
             <div class="panel" id="home">
+                <a href="#addHabit" class="button">Add</a>
+                
                 <!--this div tag is what will hold our dynamic list of habit objects populated by app.showHabits()-->
                 <div id="habitList">
+                </div>
+                <div id='calendar'>
+                    
                 </div>
             </div>
 
@@ -130,36 +132,23 @@
                 </div>
 
             </div>
+
+
+            <!-- HABIT DETAIL -->
+            <div class="panel" id="habitDetail">
+                <div id="habitDetail-output">
+                </div>
+
+                <a href="#" class="button" id="habitDetail-addLog-action">++ ADD ++</a>
+
+                <div id="habitDetail-log">
+                </div>
+                <canvas id="myChart" width="300" height="300"></canvas>
+            </div>
+
         <!--end pages-->
         </div>
     <!--end view-->
-    </div>
-
-    <div class="view" id="detailsView">
-        <header>
-            <a href="#home" data-transition="slide" class="button">Back</a>
-            <h1>Habitnator</h1>
-        </header>
-
-        <div class="pages">
-            <!-- HABIT DETAIL -->
-            <div class="panel" id="habitDetail">
-                <br>
-                <div id="habitDetail-today" class="card">
-                    
-                </div>
-
-                <div id="habitDetail-week" class="card">
-                    <div class="card-header">WEEKLY</div>
-                    <div class="card-subheader">target number: <span id="weeklyChart-target"></span></div>
-                    
-                    <canvas id="weeklyChart" width="320" height="320"></canvas>
-                </div>
-
-                <a href="#" class="button" id="habitDetail-addLog-action">+ ADD INSTANCE</a>
-
-            </div>
-        </div>
     </div>
 
 
@@ -211,6 +200,6 @@
     <!--end view-->
     </div>
 
-    <script type="text/javascript" src="cordova.js"></script>
+
 </body>
 </html>
